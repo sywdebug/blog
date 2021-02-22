@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sywdebug.github.io","root":"/blog/","images":"/blog/images","scheme":"Pisces","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="授权授权是最基本的需求，也是大部分小程序第一件要干的事官方获取用户信息接口调整，相信大部分玩家跟我一样不看文档。。。下面来详细说一下获取用户信息方面1.使用 button 组件，并将 open-type 指定为 getUserInfo 类型，获取用户基本信息html： 1&lt;button open-type&#x3D;&quot;getUserInfo&quot;&gt;授权&lt;&amp;#x2F">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小白做小程序记录小技巧[持续更新]">
+<meta property="og:url" content="https://sywdebug.github.io/blog/2020/12/04/%E5%B0%8F%E7%99%BD%E5%81%9A%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%B0%E5%BD%95%E5%B0%8F%E6%8A%80%E5%B7%A7[%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0]/index.html">
+<meta property="og:site_name" content="奇特">
+<meta property="og:description" content="授权授权是最基本的需求，也是大部分小程序第一件要干的事官方获取用户信息接口调整，相信大部分玩家跟我一样不看文档。。。下面来详细说一下获取用户信息方面1.使用 button 组件，并将 open-type 指定为 getUserInfo 类型，获取用户基本信息html： 1&lt;button open-type&#x3D;&quot;getUserInfo&quot;&gt;授权&lt;&amp;#x2F">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210105160616248.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210105160859793.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210105160907811.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210105161455184.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210105161706465.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210105161639907.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2020-12-04T08:01:36.000Z">
+<meta property="article:modified_time" content="2021-02-22T03:13:46.848Z">
+<meta property="article:author" content="sywdebug">
+<meta property="article:tag" content="小程序">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210105160616248.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70">
+
+
+<link rel="canonical" href="https://sywdebug.github.io/blog/2020/12/04/%E5%B0%8F%E7%99%BD%E5%81%9A%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%B0%E5%BD%95%E5%B0%8F%E6%8A%80%E5%B7%A7[%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0]/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>小白做小程序记录小技巧[持续更新] | 奇特</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">奇特</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%88%E6%9D%83"><span class="nav-number">1.</span> <span class="nav-text">授权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB"><span class="nav-number">1.1.</span> <span class="nav-text">动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%A4%A9%E6%97%A5%E6%9C%9F"><span class="nav-number">1.2.</span> <span class="nav-text">获取当天日期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%B8%A6%E6%9C%89%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">绑定的事件带有传递参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E9%92%AE%E5%8A%9F%E8%83%BD%E9%98%BB%E6%AD%A2%E5%86%92%E6%B3%A1"><span class="nav-number">1.4.</span> <span class="nav-text">按钮功能阻止冒泡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8A%A8%E7%94%BB-%E6%9B%B4%E5%A4%9A%E5%B1%9E%E6%80%A7%E7%9C%8B%E5%AE%98%E7%BD%91"><span class="nav-number">1.5.</span> <span class="nav-text">使用动画 更多属性看官网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E4%BF%A1%E6%81%AF"><span class="nav-number">1.6.</span> <span class="nav-text">获取元素信息</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sywdebug"
+      src="/blog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">sywdebug</p>
+  <div class="site-description" itemprop="description">一个在github搭建的hexo个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sywdebug" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sywdebug" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sywdebug@gmail.com" title="E-Mail → mailto:sywdebug@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://sywdebug.ml/" title="http:&#x2F;&#x2F;sywdebug.ml" rel="noopener" target="_blank">奇特主页</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+<a target="_blank" rel="noopener" href="https://github.com/sywdebug" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sywdebug.github.io/blog/2020/12/04/%E5%B0%8F%E7%99%BD%E5%81%9A%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%B0%E5%BD%95%E5%B0%8F%E6%8A%80%E5%B7%A7[%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0]/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="sywdebug">
+      <meta itemprop="description" content="一个在github搭建的hexo个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="奇特">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          小白做小程序记录小技巧[持续更新]
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-04 16:01:36" itemprop="dateCreated datePublished" datetime="2020-12-04T16:01:36+08:00">2020-12-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-22 11:13:46" itemprop="dateModified" datetime="2021-02-22T11:13:46+08:00">2021-02-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" itemprop="url" rel="index"><span itemprop="name">小程序</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><p>授权是最基本的需求，也是大部分小程序第一件要干的事<br><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/community/develop/doc/0000a26e1aca6012e896a517556c01">官方获取用户信息接口调整</a>，相信大部分玩家跟我一样不看文档。。。<br>下面来详细说一下获取用户信息方面<br>1.使用 button 组件，并将 open-type 指定为 getUserInfo 类型，获取用户基本信息<br>html：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button open-type&#x3D;&quot;getUserInfo&quot;&gt;授权&lt;&#x2F;button&gt;</span><br></pre></td></tr></table></figure>
+<p>这样效果是获得一个授权的弹窗，但是和之前的是大不一样<br><img src="https://img-blog.csdnimg.cn/20210105160616248.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>回调的依然是 wx.getUserInfo<br>js：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wx.getUserInfo(&#123;</span><br><span class="line">	success: (res) &#x3D;&gt; &#123;</span><br><span class="line">		console.log(&quot;成功&quot;,res);</span><br><span class="line">	&#125;,</span><br><span class="line">	fail:res&#x3D;&gt;&#123;</span><br><span class="line">		console.log(&quot;失败&quot;,res)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>效果<br><img src="https://img-blog.csdnimg.cn/20210105160859793.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210105160907811.png" alt="在这里插入图片描述"><br>至于 wx.authorize，我是这样写的，致死也没有触发</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">if (res.authSetting[&quot;scope.userInfo&quot;] &#x3D;&#x3D; undefined) &#123;</span><br><span class="line">	wx.authorize(&#123;</span><br><span class="line">		scope: &quot;scope.userInfo&quot;,</span><br><span class="line">		success: (res) &#x3D;&gt; &#123;</span><br><span class="line">			console.log(&quot;首次授权成功&quot;, res);</span><br><span class="line">		&#125;,</span><br><span class="line">		fail:res&#x3D;&gt;&#123;</span><br><span class="line">			console.log(&quot;首次授权失败&quot;,res)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>啊不对，是致死也没有成功触发，失败是这样<br><img src="https://img-blog.csdnimg.cn/20210105161455184.png" alt="在这里插入图片描述"><br>至于为什么写 ==undefined，是因为在一次都没有授权的情况下是这样的，很干净，此时是 undefined<br><img src="https://img-blog.csdnimg.cn/20210105161706465.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>而授权过但是后来关闭了是这样的，这时是有授权信息的，只是关闭了，此时是 false<br><img src="https://img-blog.csdnimg.cn/20210105161639907.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>授权这方面除了用 button，也可以使用 wx.openSetting()，打开小程序授权页面，让用户自行打开授权信息，我这里是这样写的，但是出 bug 了，不会打开还授权失败，这里就没图了。。。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wx.openSetting(&#123;</span><br><span class="line">	success: (res) &#x3D;&gt; &#123;</span><br><span class="line">		console.log(&quot;授权成功&quot;);</span><br><span class="line">	&#125;,</span><br><span class="line">	fail: (res) &#x3D;&gt; &#123;</span><br><span class="line">		console.log(&quot;授权失败&quot;);</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><p>和 H5 有点差距<br>第一种：<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/animation/wx.createAnimation.html">官方文档</a><br>wxml：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">直接在元素上加上 animation&#x3D;&quot;&#123;&#123;动画名&#125;&#125;&quot;</span><br><span class="line">例如</span><br><span class="line">&lt;view animation&#x3D;&quot;&#123;&#123;GoTop&#125;&#125;&quot;&gt;&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+<p>js：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data：&#123;</span><br><span class="line">	GoTop：“”</span><br><span class="line">&#125;</span><br><span class="line">this.GoTop &#x3D; wx.createAnimation(&#123; &#x2F;&#x2F;创建动画</span><br><span class="line">	duration: 1000, &#x2F;&#x2F;动画持续时长</span><br><span class="line">&#125;).translateY(-1000).step() &#x2F;&#x2F;动画</span><br><span class="line">this.setData(&#123;</span><br><span class="line">	GoTop: this.GoTop.export()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>第二种：<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/animation.html">官方文档</a></p>
+<h3 id="获取当天日期"><a href="#获取当天日期" class="headerlink" title="获取当天日期"></a>获取当天日期</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var util &#x3D; require(&quot;..&#x2F;..&#x2F;utils&#x2F;utils&quot;);</span><br><span class="line">var TIME &#x3D; util.formatTime(new Date());</span><br><span class="line">console.log(TIME)</span><br></pre></td></tr></table></figure>
+<h3 id="绑定的事件带有传递参数"><a href="#绑定的事件带有传递参数" class="headerlink" title="绑定的事件带有传递参数"></a>绑定的事件带有传递参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wxml:</span><br><span class="line">&lt;view bindtap&#x3D;&quot;test&quot; data-name&#x3D;&quot;&#123;&#123;666&#125;&#125;&quot;&gt;点击&lt;&#x2F;view&gt;</span><br><span class="line">js:</span><br><span class="line">test:function(event)&#123;</span><br><span class="line">	console.log(event)</span><br><span class="line">&#125;</span><br><span class="line">输出结果里有currentTarget里有dataset里有name:&quot;666&quot;可使用</span><br></pre></td></tr></table></figure>
+<p>当然也可以传递动态参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wxml:</span><br><span class="line">&lt;view bindtap&#x3D;&quot;test&quot; data-name&#x3D;&quot;&#123;&#123;arr&#125;&#125;&quot;&gt;点击&lt;&#x2F;view&gt;</span><br><span class="line">js:</span><br><span class="line">data:&#123;</span><br><span class="line">	arr&#x3D;[1,2,3,4,5,6]</span><br><span class="line">&#125;</span><br><span class="line">test:function(event)&#123;</span><br><span class="line">	console.log(event)</span><br><span class="line">&#125;</span><br><span class="line">输出结果里有currentTarget里有dataset里有name:[1,2,3,4,5,6]可使用</span><br></pre></td></tr></table></figure>
+
+<h3 id="按钮功能阻止冒泡"><a href="#按钮功能阻止冒泡" class="headerlink" title="按钮功能阻止冒泡"></a>按钮功能阻止冒泡</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wxml:</span><br><span class="line">&lt;button  catchtap&#x3D;&quot;click1&quot;&gt;&lt;&#x2F;button&gt;</span><br><span class="line">catch 用来阻止冒泡，bind不可阻止冒泡</span><br></pre></td></tr></table></figure>
+<h3 id="使用动画-更多属性看官网"><a href="#使用动画-更多属性看官网" class="headerlink" title="使用动画 更多属性看官网"></a>使用动画 更多属性看<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/animation/wx.createAnimation.html">官网</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wxml:</span><br><span class="line">&lt;view animation&#x3D;&quot; animation&quot;&gt;</span><br><span class="line">js:</span><br><span class="line">data:&#123;</span><br><span class="line">	animation:&quot;&quot;</span><br><span class="line">&#125;</span><br><span class="line">this.animation &#x3D; wx.createAnimation(&#123;</span><br><span class="line">	duration: 1000,&#x2F;&#x2F;持续时间</span><br><span class="line">	delay:100&#x2F;&#x2F;延时</span><br><span class="line">&#125;).translate(100).step()</span><br></pre></td></tr></table></figure>
+<h3 id="获取元素信息"><a href="#获取元素信息" class="headerlink" title="获取元素信息"></a>获取元素信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">js:</span><br><span class="line">wx.createSelectorQuery().select(&quot;.||#||标签&quot;).boundingClientRect(res &#x3D;&gt;</span><br><span class="line">	console.log(res)</span><br><span class="line">).exec();</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:30px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+          <div class="reward-container">
+  <div></div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    我愿意资助创作者
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/blog/images/wechatpay.png" alt="sywdebug 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/blog/images/alipay.png" alt="sywdebug 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>sywdebug
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://sywdebug.github.io/blog/2020/12/04/%E5%B0%8F%E7%99%BD%E5%81%9A%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%B0%E5%BD%95%E5%B0%8F%E6%8A%80%E5%B7%A7[%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0]/" title="小白做小程序记录小技巧[持续更新]">https://sywdebug.github.io/blog/2020/12/04/小白做小程序记录小技巧[持续更新]/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章，均在可信时间戳认证机构完成确权，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处，侵权必究！商业性使用请联系主理人购买授权许可。
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://blog.csdn.net/sywdebug?spm=1000.2115.3001.5343">
+          <span class="icon">
+            <i class="fab fa-contao"></i>
+          </span>
+
+          <span class="label">CSDN</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="http://blog.sywdebug.ml">
+          <span class="icon">
+            <i class="fab fa-wordpress"></i>
+          </span>
+
+          <span class="label">wordpress</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/blog/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag"><i class="fa fa-tag"></i> 小程序</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2020/11/18/%E5%AE%89%E8%A3%85Vue-CLI%E8%AF%A6%E7%BB%86%E6%96%B9%E6%B3%95%E5%8F%8A%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="prev" title="安装Vue-CLI详细方法及踩坑记录">
+                  <i class="fa fa-chevron-left"></i> 安装Vue-CLI详细方法及踩坑记录
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2020/12/07/vant%E7%BB%84%E4%BB%B6%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8%20-%20-%20-%20vue%E7%AF%87&%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%AF%87/" rel="next" title="vant组件库的使用 - - - vue篇&小程序篇">
+                  vant组件库的使用 - - - vue篇&小程序篇 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sywdebug</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+<script type="text/javascript" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</body>
+</html>

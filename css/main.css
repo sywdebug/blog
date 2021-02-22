@@ -2279,6 +2279,16 @@ pre code {
   display: block;
   font-size: 14px;
 }
+.post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+  border-bottom: 1px solid #0593d3;
+}
+.post-body p a:hover {
+  color: #fc6423;
+  border-bottom: none;
+  border-bottom: 1px solid #fc6423;
+}
 .category-all-page .category-all-title {
   text-align: center;
 }
