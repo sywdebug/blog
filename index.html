@@ -171,7 +171,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -180,7 +180,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -230,6 +230,91 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sywdebug.github.io/blog/2021/03/15/vue%20%E5%85%A8%E5%B1%80%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E5%8F%8A%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%B7%B2%E7%BB%8F%E7%99%BB%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="sywdebug">
+      <meta itemprop="description" content="一个在github搭建的hexo个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="奇特">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/blog/2021/03/15/vue%20%E5%85%A8%E5%B1%80%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E5%8F%8A%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%B7%B2%E7%BB%8F%E7%99%BB%E5%BD%95/" class="post-title-link" itemprop="url">vue 全局导航守卫使用方法及判断是否已经登录</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-03-15 11:19:28 / 修改时间：11:23:33" itemprop="dateCreated datePublished" datetime="2021-03-15T11:19:28+08:00">2021-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>前言：在很多项目中我们需要使用登录功能，在没有登录时无法查看更多内容，但是登录过后点击退出登录，然后返回上一页还可以继续看，这时候就可以用到导航守卫，使在未登录的时候就只能进入到登录页，在前端可以使用 vue 的导航守卫来完成</p>
+</blockquote>
+<p>在此，我使用全局前置守卫<br>在router.js中加入全局前置守卫</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;全局前置守卫</span><br><span class="line">router.beforeEach((to, from, next) &#x3D;&gt; &#123;</span><br><span class="line">  console.log(&quot;beforeEach to:&quot;, to);</span><br><span class="line">  console.log(&quot;beforeEach from&quot;, from);</span><br><span class="line">  if (to.path !&#x3D; &quot;&#x2F;&quot; &amp;&amp; JSON.parse(sessionStorage.getItem(&quot;isLogin&quot;)) &#x3D;&#x3D; false) &#123;</span><br><span class="line">    alert(&quot;请先登录&quot;);</span><br><span class="line">    next(&quot;&#x2F;&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>当然别忘了还有这个玩意，否则router是无效的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import Router from &quot;vue-router&quot;;</span><br><span class="line">const router &#x3D; new Router(&#123;</span><br><span class="line">  mode: &quot;history&quot;,</span><br><span class="line">  routes,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这样在登录时候点击登录按钮，给一个判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;如果账号和密码符合，就缓存一个isLogin为true，也就是已经登录，然后把路由push到应该去的地方</span><br><span class="line">if (this.account &#x3D;&#x3D; &quot;admin&quot; &amp;&amp; this.password &#x3D;&#x3D; &quot;123456&quot;) &#123;</span><br><span class="line">	sessionStorage[&quot;isLogin&quot;]&#x3D;true</span><br><span class="line">	this.$router.push(&#39;.&#x2F;statistics.vue&#39; )</span><br><span class="line">&#125; else &#123;</span><br><span class="line">	alert(&quot;请输入正确的账号和密码&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在点击退出登录时候给一个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;把储存在本地的isLogin改为false，也就是未登录状态，然后把路由push到根目录</span><br><span class="line">sessionStorage.setItem(&quot;isLogin&quot;,false)</span><br><span class="line">this.$router.push(&quot;&#x2F;&quot;)</span><br></pre></td></tr></table></figure>
+<p>这个时候退出后再点击返回上一页就会出现<br><img src="https://img-blog.csdnimg.cn/20210315111802113.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1013,90 +1098,6 @@
 <li>上方导航栏 - - - 运行 - - - 运行到手机或模拟器 - - - 选择手机或模拟器（数据线连接手机即可，个人没试过）<br>编译好后会让你安装一个 app，也就是编译的移动端 app<h1 id="❀❀❀❀❀❀完结散花❀❀❀❀❀❀"><a href="#❀❀❀❀❀❀完结散花❀❀❀❀❀❀" class="headerlink" title="❀❀❀❀❀❀完结散花❀❀❀❀❀❀"></a>❀❀❀❀❀❀完结散花❀❀❀❀❀❀</h1></li>
 </ol>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sywdebug.github.io/blog/2020/12/17/VMware%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="sywdebug">
-      <meta itemprop="description" content="一个在github搭建的hexo个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="奇特">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2020/12/17/VMware%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">VMware安装及使用详细教程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-12-17 12:21:21" itemprop="dateCreated datePublished" datetime="2020-12-17T12:21:21+08:00">2020-12-17</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-02-22 11:20:01" itemprop="dateModified" datetime="2021-02-22T11:20:01+08:00">2021-02-22</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/%E8%99%9A%E6%8B%9F%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">虚拟机</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h2><p>第一次安装的时候会让你重启电脑安装个什么东西</p>
-<p>重启电脑后再次安装就会出现安装界面</p>
-<p>傻瓜式安装<br>下一步 - - - 同意许可，下一步</p>
-<p>这里我前面装了Hyper-v看哪个好用来着，没有卸载，就会出现这个，我怕搞砸了把Hyper-v删了才安装的，所以这个玩意我也不知道是啥<br><img src="https://img-blog.csdnimg.cn/2020121619151945.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>如果没装其他虚拟机，就是直接显示下面这个，自定义一下安装位置，默认是勾的第二个，第一个应该是勾上更好吧<br><img src="https://img-blog.csdnimg.cn/20201216192130113.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下一步 - - - 下一步 - - - 安装 - - - 坐等安装<br><img src="https://img-blog.csdnimg.cn/20201216192857116.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>完事了就是这个<br>然后再重新启动<br><img src="https://img-blog.csdnimg.cn/20201216192953162.png" alt="在这里插入图片描述"></p>
-<h2 id="使用虚拟机"><a href="#使用虚拟机" class="headerlink" title="使用虚拟机"></a>使用虚拟机</h2><p>打开安装好的虚拟机<br>点击创建新的虚拟机<br><img src="https://img-blog.csdnimg.cn/20201216193927532.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>安装的时候选典型就可以了，大佬请无视这句话<br><img src="https://img-blog.csdnimg.cn/20201216193936740.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我这里正好有个Ubuntu桌面版的映像文件，映像文件什么的自己去网上下就行了<br><img src="https://img-blog.csdnimg.cn/20201216194010316.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>调整一下虚拟机的名字和位置<br><img src="https://img-blog.csdnimg.cn/20201216194148606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>根据电脑的配置和自己的需求设置一下磁盘大小，内存等<br><img src="https://img-blog.csdnimg.cn/20201216194220735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>好，看着教程做的，在这里先建议不要继续跟着做了，往下翻，下面有提示从哪继续</strong><br><img src="https://img-blog.csdnimg.cn/20201216194548151.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>最后点完成,就会自动安装<br><img src="https://img-blog.csdnimg.cn/20201216194623367.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这里安装的是一步到位，还是比较喜欢的，不像之前装双系统胡乱配置很麻烦<br>前面Hyper-v好像也是要自己配置，嫌麻烦所以就直接没安装就来装VMware了<br><img src="https://img-blog.csdnimg.cn/20201216200419601.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>好，从这开始可以继续跟着做了</strong><br>哎，很好，他娘的卡在 installing open-vm-tools 那了<br>上网搜了一下解决方法，就是在这一步的时候，把下面创建后开启此虚拟机去掉<br><img src="https://img-blog.csdnimg.cn/20201216194548151.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后找到安装目录下的 autoinst.iso 删了,然后就自己安装…..<br>到底还是得自己装啊，，，罢了，也算是在熟悉一下安装的方法了<br>划掉之后，点击完成，虚拟机算是创建好了，然后去目录删除 autoinst.iso<br>回到虚拟机中，自行打开<br><img src="https://img-blog.csdnimg.cn/20201216202819521.png" alt="在这里插入图片描述"><br>后面就是安装Ubuntu了，可以参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/sywdebug/article/details/111312648">Ubuntu安装方法</a></p>
-<h1 id="❀❀❀❀❀❀完结散花❀❀❀❀❀❀"><a href="#❀❀❀❀❀❀完结散花❀❀❀❀❀❀" class="headerlink" title="❀❀❀❀❀❀完结散花❀❀❀❀❀❀"></a>❀❀❀❀❀❀完结散花❀❀❀❀❀❀</h1>
       
     </div>
 

@@ -23,32 +23,25 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"sywdebug.github.io","root":"/blog/","images":"/blog/images","scheme":"Pisces","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="准备 安装  nodejs 安装 git  可以看我之前的博客，好像有写安装方法 安装中文官网安装是安装在本地，首先在本地创建一个目录，使用命令行打开到此目录，运行以下命令  npm install hexo-cli -ghexo init blogcd blognpm installhexo server   最终会得到一个这个，可以打开看一下，是测试的博客对了，报这个错误的话，把这个目录下的这">
+<meta name="description" content="前言：在很多项目中我们需要使用登录功能，在没有登录时无法查看更多内容，但是登录过后点击退出登录，然后返回上一页还可以继续看，这时候就可以用到导航守卫，使在未登录的时候就只能进入到登录页，在前端可以使用 vue 的导航守卫来完成  在此，我使用全局前置守卫在router.js中加入全局前置守卫 12345678910&#x2F;&#x2F;全局前置守卫router.beforeEach((to,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用 github 仓库搭建 Hexo 个人博客">
-<meta property="og:url" content="https://sywdebug.github.io/blog/2021/02/19/%E4%BD%BF%E7%94%A8%20github%20%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA%20Hexo%20%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:title" content="vue 全局导航守卫使用方法及判断是否已经登录">
+<meta property="og:url" content="https://sywdebug.github.io/blog/2021/03/15/vue%20%E5%85%A8%E5%B1%80%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E5%8F%8A%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%B7%B2%E7%BB%8F%E7%99%BB%E5%BD%95/index.html">
 <meta property="og:site_name" content="奇特">
-<meta property="og:description" content="准备 安装  nodejs 安装 git  可以看我之前的博客，好像有写安装方法 安装中文官网安装是安装在本地，首先在本地创建一个目录，使用命令行打开到此目录，运行以下命令  npm install hexo-cli -ghexo init blogcd blognpm installhexo server   最终会得到一个这个，可以打开看一下，是测试的博客对了，报这个错误的话，把这个目录下的这">
+<meta property="og:description" content="前言：在很多项目中我们需要使用登录功能，在没有登录时无法查看更多内容，但是登录过后点击退出登录，然后返回上一页还可以继续看，这时候就可以用到导航守卫，使在未登录的时候就只能进入到登录页，在前端可以使用 vue 的导航守卫来完成  在此，我使用全局前置守卫在router.js中加入全局前置守卫 12345678910&#x2F;&#x2F;全局前置守卫router.beforeEach((to,">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210219132945138.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210219133128731.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210219133210140.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210219133332330.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210219140958200.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210219133720294.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210219133956711.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2021022216353286.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70">
-<meta property="article:published_time" content="2021-02-19T06:53:10.000Z">
-<meta property="article:modified_time" content="2021-02-22T10:28:14.731Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210315111802113.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-03-15T03:19:28.000Z">
+<meta property="article:modified_time" content="2021-03-15T03:23:33.899Z">
 <meta property="article:author" content="sywdebug">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="git">
-<meta property="article:tag" content="github">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="vue-cli">
+<meta property="article:tag" content="vue-router">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210219132945138.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210315111802113.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70">
 
 
-<link rel="canonical" href="https://sywdebug.github.io/blog/2021/02/19/%E4%BD%BF%E7%94%A8%20github%20%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA%20Hexo%20%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+<link rel="canonical" href="https://sywdebug.github.io/blog/2021/03/15/vue%20%E5%85%A8%E5%B1%80%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E5%8F%8A%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%B7%B2%E7%BB%8F%E7%99%BB%E5%BD%95/">
 
 
 <script class="page-configurations">
@@ -60,7 +53,7 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>使用 github 仓库搭建 Hexo 个人博客 | 奇特</title>
+<title>vue 全局导航守卫使用方法及判断是否已经登录 | 奇特</title>
   
 
 
@@ -157,7 +150,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -170,7 +163,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E5%88%B0-github"><span class="nav-number">3.</span> <span class="nav-text">推送到 github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">博客配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%9D%80%E2%9D%80%E2%9D%80%E2%9D%80%E2%9D%80%E2%9D%80%E5%AE%8C%E7%BB%93%E6%95%A3%E8%8A%B1%E2%9D%80%E2%9D%80%E2%9D%80%E2%9D%80%E2%9D%80%E2%9D%80"><span class="nav-number"></span> <span class="nav-text">❀❀❀❀❀❀完结散花❀❀❀❀❀❀</span></a></div>
         </div>
         <!--/noindex-->
 
@@ -255,7 +247,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sywdebug.github.io/blog/2021/02/19/%E4%BD%BF%E7%94%A8%20github%20%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA%20Hexo%20%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+    <link itemprop="mainEntityOfPage" href="https://sywdebug.github.io/blog/2021/03/15/vue%20%E5%85%A8%E5%B1%80%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E5%8F%8A%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%B7%B2%E7%BB%8F%E7%99%BB%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.png">
@@ -268,7 +260,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          使用 github 仓库搭建 Hexo 个人博客
+          vue 全局导航守卫使用方法及判断是否已经登录
         </h1>
 
         <div class="post-meta-container">
@@ -278,23 +270,17 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2021-02-19 14:53:10" itemprop="dateCreated datePublished" datetime="2021-02-19T14:53:10+08:00">2021-02-19</time>
+      <time title="创建时间：2021-03-15 11:19:28 / 修改时间：11:23:33" itemprop="dateCreated datePublished" datetime="2021-03-15T11:19:28+08:00">2021-03-15</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-02-22 18:28:14" itemprop="dateModified" datetime="2021-02-22T18:28:14+08:00">2021-02-22</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/github/" itemprop="url" rel="index"><span itemprop="name">github</span></a>
+          <a href="/blog/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
         </span>
     </span>
 
@@ -308,24 +294,19 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ol>
-<li>安装  nodejs</li>
-<li>安装 git</li>
-</ol>
-<p>可以看我之前的博客，好像有写安装方法</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">中文官网</a><br>安装是安装在本地，首先在本地创建一个目录，使用命令行打开到此目录，运行以下命令</p>
-<blockquote>
-<p>npm install hexo-cli -g<br>hexo init blog<br>cd blog<br>npm install<br>hexo server</p>
+        <blockquote>
+<p>前言：在很多项目中我们需要使用登录功能，在没有登录时无法查看更多内容，但是登录过后点击退出登录，然后返回上一页还可以继续看，这时候就可以用到导航守卫，使在未登录的时候就只能进入到登录页，在前端可以使用 vue 的导航守卫来完成</p>
 </blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210219132945138.png" alt="在这里插入图片描述"></p>
-<p>最终会得到一个这个，可以打开看一下，是测试的博客<br><img src="https://img-blog.csdnimg.cn/20210219133128731.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210219133210140.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>对了，报这个错误的话，把这个目录下的这个文件删掉就行了<br><img src="https://img-blog.csdnimg.cn/20210219133332330.png" alt="在这里插入图片描述"></p>
-<h2 id="推送到-github"><a href="#推送到-github" class="headerlink" title="推送到 github"></a>推送到 github</h2><p>用编辑器打开目录中的 _config.yml 文件<br>先上面的 url 和 root 补充完整，不然会没有 css 样式和 js 脚本<br><img src="https://img-blog.csdnimg.cn/20210219140958200.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后把后面的补充完整,也可以加上 branch:[自定义分支名称] 和 massage:[自定义提交消息]<br><img src="https://img-blog.csdnimg.cn/20210219133720294.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>保存后执行 hexo generate 更新本地代码或执行hexo clean删除本地代码<br>执行 hexo deploy 生成本地代码并推送到 github 库<br><img src="https://img-blog.csdnimg.cn/20210219133956711.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>部署的步骤基本就是写完之后执行以下命令</p>
-<ol>
-<li>hexo clean # 清除已生成文件及缓存</li>
-<li>hexo generate # 生成静态页面，简写做hexo g</li>
-<li>hexo server # 启动本地WEB服务器，简写做hexo s<h2 id="博客配置"><a href="#博客配置" class="headerlink" title="博客配置"></a>博客配置</h2><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">官方配置文档</a><br>博客的配置文件就是博客目录下的 _config.yml 文件<br>具体的自己看文档吧，这里展示下我自己的大概配置<br><img src="https://img-blog.csdnimg.cn/2021022216353286.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-</ol>
-<h1 id="❀❀❀❀❀❀完结散花❀❀❀❀❀❀"><a href="#❀❀❀❀❀❀完结散花❀❀❀❀❀❀" class="headerlink" title="❀❀❀❀❀❀完结散花❀❀❀❀❀❀"></a>❀❀❀❀❀❀完结散花❀❀❀❀❀❀</h1>
+<p>在此，我使用全局前置守卫<br>在router.js中加入全局前置守卫</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;全局前置守卫</span><br><span class="line">router.beforeEach((to, from, next) &#x3D;&gt; &#123;</span><br><span class="line">  console.log(&quot;beforeEach to:&quot;, to);</span><br><span class="line">  console.log(&quot;beforeEach from&quot;, from);</span><br><span class="line">  if (to.path !&#x3D; &quot;&#x2F;&quot; &amp;&amp; JSON.parse(sessionStorage.getItem(&quot;isLogin&quot;)) &#x3D;&#x3D; false) &#123;</span><br><span class="line">    alert(&quot;请先登录&quot;);</span><br><span class="line">    next(&quot;&#x2F;&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>当然别忘了还有这个玩意，否则router是无效的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import Router from &quot;vue-router&quot;;</span><br><span class="line">const router &#x3D; new Router(&#123;</span><br><span class="line">  mode: &quot;history&quot;,</span><br><span class="line">  routes,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这样在登录时候点击登录按钮，给一个判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;如果账号和密码符合，就缓存一个isLogin为true，也就是已经登录，然后把路由push到应该去的地方</span><br><span class="line">if (this.account &#x3D;&#x3D; &quot;admin&quot; &amp;&amp; this.password &#x3D;&#x3D; &quot;123456&quot;) &#123;</span><br><span class="line">	sessionStorage[&quot;isLogin&quot;]&#x3D;true</span><br><span class="line">	this.$router.push(&#39;.&#x2F;statistics.vue&#39; )</span><br><span class="line">&#125; else &#123;</span><br><span class="line">	alert(&quot;请输入正确的账号和密码&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在点击退出登录时候给一个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;把储存在本地的isLogin改为false，也就是未登录状态，然后把路由push到根目录</span><br><span class="line">sessionStorage.setItem(&quot;isLogin&quot;,false)</span><br><span class="line">this.$router.push(&quot;&#x2F;&quot;)</span><br></pre></td></tr></table></figure>
+<p>这个时候退出后再点击返回上一页就会出现<br><img src="https://img-blog.csdnimg.cn/20210315111802113.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N5d2RlYnVn,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
     </div>
 
     
@@ -369,7 +350,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://sywdebug.github.io/blog/2021/02/19/%E4%BD%BF%E7%94%A8%20github%20%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA%20Hexo%20%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="使用 github 仓库搭建 Hexo 个人博客">https://sywdebug.github.io/blog/2021/02/19/使用 github 仓库搭建 Hexo 个人博客/</a>
+      <a href="https://sywdebug.github.io/blog/2021/03/15/vue%20%E5%85%A8%E5%B1%80%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E5%8F%8A%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%B7%B2%E7%BB%8F%E7%99%BB%E5%BD%95/" title="vue 全局导航守卫使用方法及判断是否已经登录">https://sywdebug.github.io/blog/2021/03/15/vue 全局导航守卫使用方法及判断是否已经登录/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章，均在可信时间戳认证机构完成确权，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处，侵权必究！商业性使用请联系主理人购买授权许可。
@@ -405,23 +386,20 @@
 </div>
 
           <div class="post-tags">
-              <a href="/blog/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
-              <a href="/blog/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
-              <a href="/blog/tags/github/" rel="tag"><i class="fa fa-tag"></i> github</a>
+              <a href="/blog/tags/vue/" rel="tag"><i class="fa fa-tag"></i> vue</a>
+              <a href="/blog/tags/vue-cli/" rel="tag"><i class="fa fa-tag"></i> vue-cli</a>
+              <a href="/blog/tags/vue-router/" rel="tag"><i class="fa fa-tag"></i> vue-router</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/blog/2021/02/05/%E6%9C%AC%E5%9C%B0%E5%AD%97%E4%BD%93%E4%B8%8A%E4%BC%A0%E5%88%B0%E7%BD%91%E7%BB%9C%E5%90%8E%E8%BF%90%E7%94%A8%E5%88%B0%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AF%A6%E7%BB%86%E8%BF%87%E7%A8%8B/" rel="prev" title="本地字体上传到网络后运用到微信小程序详细过程">
-                  <i class="fa fa-chevron-left"></i> 本地字体上传到网络后运用到微信小程序详细过程
+                <a href="/blog/2021/03/13/vue-cli3%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8px2rem%E6%8F%92%E4%BB%B6%E5%81%9A%E8%87%AA%E9%80%82%E5%BA%94/" rel="prev" title="vue-cli3项目使用px2rem插件做自适应">
+                  <i class="fa fa-chevron-left"></i> vue-cli3项目使用px2rem插件做自适应
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/blog/2021/02/22/hexo%E5%AE%89%E8%A3%85next%E4%B8%BB%E9%A2%98%E5%8F%8A%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" rel="next" title="hexo安装next主题及主题配置">
-                  hexo安装next主题及主题配置 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
